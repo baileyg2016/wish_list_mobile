@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function Home() {
+export default function Home(props: any) {
     return (
         <View style={styles.container}>
             <Text>Thank you! You are new logged into your account!</Text>

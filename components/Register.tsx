@@ -1,70 +1,133 @@
-import axios from 'axios';
-import { Link } from 'react-router-native';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 // import '../Login.css';
-// import { authenticationService as auth } from '../_services/auth_user';
-import { View, Text } from 'react-native';
+import { authService as auth } from '../_services/auth_user';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-export default class Register extends Component<{}, {firstName: string, lastName: string, username: string, password: string, clicked: boolean}> {
-    constructor(props: any) {
-        super(props);
-        this.setFirstName = this.setFirstName.bind(this);
-        this.setLastName = this.setLastName.bind(this);
-        this.setUsername = this.setUsername.bind(this);
-        this.setPassword = this.setPassword.bind(this);
-        this.register = this.register.bind(this);
+const styles = StyleSheet.create({
+    body: {
+        backgroundColor: "#F3EBF6",
+        // fontFamily: 'sans-serif',
+        flex: 1,
+        alignItems: 'center',
+    },
+    
+    container: {
+        backgroundColor: "#FFFFFF",
+        marginTop: "35%",
+        paddingTop: 30,
+        paddingBottom: 30,
+        alignItems: "center",
+        width: "90%",
+        // height: "400px",
+        // margin: "auto",
+        borderRadius: 25,
+        // boxShadow: "0px 11px 35px 2px rgba(0, 0, 0, 0.14)",
+    },
 
-        this.state = {
-            firstName: "",
-            lastName: "",
-            username: "",
-            password: "",
-            clicked: false,
+    title: {
+        paddingTop: 40,
+        color: "#8C55AA",
+        // fontFamily: "sans-serif",
+        fontWeight: "bold",
+        fontSize: 23,
+    },
+    
+    input: {
+        width: "70%",
+        color: "#263238",
+        fontWeight: "700",
+        fontSize: 14,
+        // color: 'black',
+        // letterpacing: 1px,
+        backgroundColor: "#e6e6e6",
+        // opacity: 0.04,
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingRight: 20,
+        paddingLeft: 20,
+        // border: "none",
+        borderRadius: 20,
+        // outline: "none",
+        // boxSizing: "border-box",
+        borderWidth: 2,
+        borderStyle: "solid",
+        borderColor: "transparent",
+        marginTop: 15,
+        marginBottom: 15,
+        /* margin-left: 46px, */
+        textAlign: "center",
+        // marginBottom: 27,
+        // font-family: 'Ubuntu', sans-serif,
+    },
+    forgotAndRegister: {
+        // textShadow: 0px 0px 3px rgba(117, 117, 117, 0.12),
+        color: "#E1BEE7",
+        // paddingTop: 5,
+        // top: 5
+    },
+});
+
+const Register = (props: any) => {
+    
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [msg, setMsg] = useState('');
+
+    const register = () => {
+        if ((firstName || lastName || username || password) !== "") {
+            auth.register(firstName, lastName, username, password)
+                .then((resp) => {
+                    console.log(resp)
+                    if (resp) {
+                        props.navigation.navigate("Home");
+                    } else {
+                        setMsg("Something went wrong please try again")
+                    }
+                })
+        } else {
+            setMsg("Please fill out every field");
         }
     }
-
-    setFirstName(event: any) {
-        this.setState({firstName: event.target.value})
-    }
-
-    setLastName(event: any) {
-        this.setState({lastName: event.target.value})
-    }
-
-    setUsername(event: any) {
-        this.setState({username: event.target.value})
-    }
-
-    setPassword(event: any) {
-        this.setState({password: event.target.value})
-    }
-
-    register() {
-        this.setState({clicked: true});
-        // auth.register(this.state.firstName, this.state.lastName, this.state.username, this.state.password)
-        //     .then((resp) => {
-        //         console.log(resp)
-                
-        //     })
-        // this.setState({clicked: false});
-    }
-    render() {
-        return (
-            // <div className="main">
-            //     <p className="sign">Sign in</p>
-            //     <input className="un " type="text" placeholder="Johnny" value={this.state.firstName} onChange={this.setFirstName} />
-            //     <input className="un " type="text" placeholder="Doe" value={this.state.lastName} onChange={this.setLastName} />
-            //     <input className="un " type="text" placeholder="example@email.com" value={this.state.username} onChange={this.setUsername} />
-            //     <input className="pass" type="password" placeholder="Password" value={this.state.password} onChange={this.setPassword}/>
-            //     {
-            //         !this.state.clicked 
-            //         ? <div onClick={this.register}><a className="submit">Register</a></div>
-            //         : <div>Adding {this.state.firstName}...</div>
-            //     }
-            // </div>
-            <View>
-                <Text>Register</Text>
+    
+    return (
+        <View style={styles.body}>
+            <View style={styles.container}>
+                <Text style={styles.body}>Create an Account</Text>
+                <Text>First Name</Text>
+                <TextInput
+                    textContentType="name"
+                    style={styles.input}
+                    placeholder="Harry"
+                    onChangeText={text => setFirstName(text)}
+                    value={firstName} />
+                <Text>Last Name</Text>
+                <TextInput
+                    textContentType="name"
+                    style={styles.input}
+                    placeholder="Potter"
+                    onChangeText={text => setLastName(text)}
+                    value={lastName} />
+                <Text>Email</Text>
+                <TextInput
+                    textContentType="emailAddress"
+                    style={styles.input}
+                    placeholder="iHaveAHairyPotter@hogwarts.com"
+                    onChangeText={text => setUsername(text)}
+                    value={username} />
+                <Text>Password</Text>
+                <TextInput
+                    textContentType="password"
+                    style={styles.input}
+                    placeholder="Keep this a secret"
+                    onChangeText={text => setPassword(text)}
+                    value={password} />
+                <TextInput>{msg}</TextInput>
+                <Button color="#8C55AA" title="Create Account" onPress={() => register()} />
             </View>
-        );
-    }
+        </View>
+    );   
 }
+
+export default Register;
