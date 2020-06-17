@@ -27,7 +27,7 @@ function login(username, password) {
             AsyncStorage.setItem('token', res.jwt);
             console.log(res)
             if (res === undefined) {
-                return false;
+                return null;
             }
             
             currUserSubject.next(res.jwt);

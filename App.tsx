@@ -61,14 +61,14 @@ const App = () => {
           return {
             ...prevState,
             isSignout: true,
-            token: undefined,
+            token: null,
           };
       }
     },
     {
       isLoading: true,
       isSignout: false,
-      token: undefined,
+      token: null,
     }
   );
 
@@ -110,7 +110,7 @@ const App = () => {
       },
       logOut: () => {
         auth.logout();
-        dispatch({ type: 'SIGN_OUT', token: undefined })
+        dispatch({ type: 'SIGN_OUT', token: null })
       },
       register: async (firstName: string, lastName: string, username: string, password: string) => {
         // In a production app, we need to send user data to server and get a token
@@ -127,14 +127,15 @@ const App = () => {
 
   // AsyncStorage.clear();
   // authContext.logOut();
-  // state.token = undefined;
+  // state.token = null;
+  console.log(state)
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         <Stack.Navigator>
-          {state.token === undefined ? (
+          {state.token === null || state.token === undefined ? (
             <>
-              <Stack.Screen name="Sign into Wish List" component={Login} />
+              <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="Register" component={Register} />
             </>
           ) : (

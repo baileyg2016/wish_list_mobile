@@ -104,7 +104,6 @@ export const Login = (props: any) => {
                     </View>
                 </View>
             )}
-            
         </AuthContext.Consumer>
     );
 }
