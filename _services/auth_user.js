@@ -2,6 +2,7 @@ import axios from 'axios';
 import { BehaviorSubject } from 'rxjs';
 import { handleResponse } from '../_helpers';
 import { REACT_APP_API_URL } from 'react-native-dotenv';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const currUserSubject = new BehaviorSubject();
 
@@ -21,15 +22,17 @@ function login(username, password) {
         "username": username,
         "password": password
     }).then(handleResponse)
-        .then(user => {
+        .then(res => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            // sessionStorage.setItem('currUser', JSON.stringify(user));
-            if (user === undefined) {
+            AsyncStorage.setItem('token', res.jwt);
+            console.log(res)
+            if (res === undefined) {
                 return false;
             }
             
-            currUserSubject.next(user.jwt);
-            return true;
+            currUserSubject.next(res.jwt);
+            
+            return res.jwt;
         });
 }
 
@@ -40,18 +43,20 @@ function register(firstName, lastName, username, password) {
         email: username,
         password: password
     }).then(handleResponse).then(
-        user => {
-            if (user) {
-                currUserSubject.next(user);
-                return true;
+        res => {
+            console.log(res)
+            if (res) {
+                currUserSubject.next(res.jwt);
+                AsyncStorage.setItem('token', res.jwt);
+                return res.jwt;
             }
-            return false;
+            return null;
         }
     )
 }
 
 function logout() {
     // remove user from the cache
-    // sessionStorage.removeItem('currUser');
-    // currUserSubject.next(null);
+    AsyncStorage.removeItem('token');
+    currUserSubject.next(null);
 }

@@ -1,9 +1,10 @@
 import axios from 'axios';
 // import { Link, useHistory, withRouter } from 'react-router-native';
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useContext } from 'react';
 // import '../Login.css';
-import { authService as auth } from '../_services/auth_user';
+// import { authService as auth } from '../_services/auth_user';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { AuthContext } from '../_contexts/Contexts';
 
 const styles = StyleSheet.create({
     body: {
@@ -69,18 +70,8 @@ const styles = StyleSheet.create({
 });
 
 export const Login = (props: any) => {
-    const loginClick = () => {
-        console.log("clicked")
-        auth.login(username, password).then((loggedIn: boolean) => {
-            // useHistory().push("/home")
-            if (loggedIn) {
-                console.log("logged in")
-                props.navigation.navigate('Home');
-            } else {
-                setMsg('Incorrect username or password');
-                console.log("not logged in")
-            }
-        })
+    const loginClick = (auth: any) => {
+        auth.logIn(username, password);
     }
 
     const [username, setUsername] = useState('');
@@ -88,27 +79,32 @@ export const Login = (props: any) => {
     const [msg, setMsg] = useState('');
 
     return (
-            <View style={styles.body}>
-                <View style={styles.container}>
-                    <Text style={styles.title}>Log into your Wish List!</Text>
-                    <Text style={{color: 'red'}}>{msg}</Text>
-                    <TextInput
-                        textContentType="emailAddress"
-                        style={styles.input}
-                        placeholder="Username"
-                        onChangeText={text => setUsername(text)}
-                        value={username} />
-                    <TextInput
-                        secureTextEntry={true}
-                        textContentType="password"
-                        style={styles.input}
-                        placeholder="Password"
-                        onChangeText={text => setPassword(text)}
-                        value={password} />
-                    <Button color="#8C55AA" title="Sign in" onPress={() => loginClick()}/>
-                    {/* <Text style={styles.forgotAndRegister}>Forgot Password?</Text> */}
-                    <Text style={styles.forgotAndRegister} onPress={() => props.navigation.navigate("Register")}>Register</Text>
+        <AuthContext.Consumer>
+            {auth => (
+                <View style={styles.body}>
+                    <View style={styles.container}>
+                        <Text style={styles.title}>Log into your Wish List!</Text>
+                        <Text style={{color: 'red'}}>{msg}</Text>
+                        <TextInput
+                            textContentType="emailAddress"
+                            style={styles.input}
+                            placeholder="Username"
+                            onChangeText={text => setUsername(text)}
+                            value={username} />
+                        <TextInput
+                            secureTextEntry={true}
+                            textContentType="password"
+                            style={styles.input}
+                            placeholder="Password"
+                            onChangeText={text => setPassword(text)}
+                            value={password} />
+                        <Button color="#8C55AA" title="Sign in" onPress={() => loginClick(auth)}/>
+                        {/* <Text style={styles.forgotAndRegister}>Forgot Password?</Text> */}
+                        <Text style={styles.forgotAndRegister} onPress={() => props.navigation.navigate("Register")}>Register</Text>
+                    </View>
                 </View>
-            </View>
-        );
+            )}
+            
+        </AuthContext.Consumer>
+    );
 }
