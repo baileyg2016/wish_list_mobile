@@ -8,36 +8,26 @@
 
 import React, { Component, useState, useEffect, useReducer, createContext, useMemo } from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  AppRegistry,
+  Button,
 } from 'react-native';
-
-// import {
-//   Header,
-//   LearnMoreLinks,
-//   Colors,
-//   DebugInstructions,
-//   ReloadInstructions,
-// } from 'react-native/Libraries/NewAppScreen';
-// import { NativeRouter, Route, Switch, Redirect, Link, MemoryRouter } from 'react-router-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import AsyncStorage from '@react-native-community/async-storage';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { authService as auth } from './_services/auth_user';
 
 import { AuthContext } from './_contexts/Contexts';
 import { Login } from './components/Login';
+import FetchFromStorage from './_services/FetchFromStorage'
 import Register from './components/Register';
 import Home from './components/Home';
-import { dispatch } from 'rxjs/internal/observable/pairs';
+import Profile from './components/Profile';
+import Friends from './components/Friends';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+const { getAccessToken } = FetchFromStorage;
 
 
 const App = () => {
@@ -79,7 +69,7 @@ const App = () => {
       let userToken;
 
       try {
-        userToken = await AsyncStorage.getItem('token');
+        userToken = await getAccessToken;
         console.log(userToken)
       } catch (e) {
         // Restoring token failed
@@ -132,18 +122,27 @@ const App = () => {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator>
           {state.token === null || state.token === undefined ? (
-            <>
+            <Stack.Navigator>
               <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="Register" component={Register} />
-            </>
+            </Stack.Navigator>
           ) : (
-            <>
-              <Stack.Screen name="Home" component={Home} />
-            </>
+            <Tab.Navigator>
+              <Tab.Screen name="Profile" component={Profile} />
+              <Tab.Screen 
+                name="Home"
+                component={Home}
+                /*options={{
+                  headerRight: () => (
+                    <Button 
+                      onPress={() => console.log('this will open a page to add something')}
+                      title="Add Item"/>
+                  ),
+                }} */ />
+              <Tab.Screen name="Friends" component={Friends} />
+            </Tab.Navigator>
           )}
-        </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
   );

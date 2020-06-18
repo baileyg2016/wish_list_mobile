@@ -2,9 +2,10 @@ import axios from 'axios';
 import { BehaviorSubject } from 'rxjs';
 import { handleResponse } from '../_helpers';
 import { REACT_APP_API_URL } from 'react-native-dotenv';
-import AsyncStorage from '@react-native-community/async-storage';
+import FetchFromStorage from './FetchFromStorage';
 
 const currUserSubject = new BehaviorSubject();
+const { setToken, clearToken } = FetchFromStorage;
 
 export const authService = {
     login,
@@ -24,7 +25,7 @@ function login(username, password) {
     }).then(handleResponse)
         .then(res => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            AsyncStorage.setItem('token', res.jwt);
+            setToken(res.jwt);
             console.log(res)
             if (res === undefined) {
                 return null;
@@ -47,7 +48,7 @@ function register(firstName, lastName, username, password) {
             console.log(res)
             if (res) {
                 currUserSubject.next(res.jwt);
-                AsyncStorage.setItem('token', res.jwt);
+                setToken(res.jwt);
                 return res.jwt;
             }
             return null;
@@ -57,6 +58,6 @@ function register(firstName, lastName, username, password) {
 
 function logout() {
     // remove user from the cache
-    AsyncStorage.removeItem('token');
+    clearToken();
     currUserSubject.next(null);
 }
