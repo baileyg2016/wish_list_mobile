@@ -1,86 +1,42 @@
-import React, { useEffect, Component } from 'react';
+import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Node } from '@babel/core';
 
 import FetchUserData from '../_services/FetchUserData';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { GridFlatList } from './GridFlatList';
 
 const { getWishList } = FetchUserData;
 
-const list =  [
-  {
-    id: 1,
-    title: 'The Basics',
-    link: 'https://facebook.github.io/react-native/docs/tutorial',
-    description: 'Explains a Hello World for React Native.',
-  },
-  {
-    id: 2,
-    title: 'Style',
-    link: 'https://facebook.github.io/react-native/docs/style',
-    description:
-      'Covers how to use the prop named style which controls the visuals.',
-  },
-  {
-    id: 3,
-    title: 'Layout',
-    link: 'https://facebook.github.io/react-native/docs/flexbox',
-    description: 'React Native uses flexbox for layout, learn how it works.',
-  },
-  {
-    id: 4,
-    title: 'Components',
-    link: 'https://facebook.github.io/react-native/docs/components-and-apis',
-    description: 'The full list of components and APIs inside React Native.',
-  },
-  {
-    id: 5,
-    title: 'Navigation',
-    link: 'https://facebook.github.io/react-native/docs/navigation',
-    description:
-      'How to handle moving between screens inside your application.',
-  },
-  {
-    id: 6,
-    title: 'Networking',
-    link: 'https://facebook.github.io/react-native/docs/network',
-    description: 'How to use the Fetch API in React Native.',
-  },
-  {
-    id: 7,
-    title: 'Help',
-    link: 'https://facebook.github.io/react-native/help',
-    description:
-      'Need more help? There are many other React Native developers who may have the answer.',
-  },
-  {
-    id: 8,
-    title: 'Follow us on Twitter',
-    link: 'https://twitter.com/reactnative',
-    description:
-      'Stay in touch with the community, join in on Q&As and more by following React Native on Twitter.',
-  },
-];
+export default class Home extends Component<{}, {data: Array<{id: number, src: string, name: string, cost: string}>} > {
+  constructor(props: object) {
+    super(props);
 
-const Home = () => (
-    // getWishList();
-    <View style={styles.container}>
-        {list.map(({id, title, link, description}) => {
-        return (
-            <React.Fragment key={id}>
-            <View style={styles.separator} />
-            <TouchableOpacity
-                accessibilityRole={'button'}
-                // onPress={() => openURLInBrowser(link)}
-                style={styles.linkContainer}>
-                <Text style={styles.link}>{title}</Text>
-                <Text style={styles.description}>{description}</Text>
-            </TouchableOpacity>
-            </React.Fragment>
-        );
-        })}
-  </View>
+    this.state = {
+      data: [{id: -1, src: '', name: '', cost: "$-1.00"}]
+    }
+  }
+
+  async componentDidMount() {
+    let list: Array<{pkItem: string, Name: string, url: string, ImageURL: string, Cost: string}> = await getWishList();
     
-);
+    let count: number = 0;
+    let items: Array<{id: number, src: string, name: string, cost: string}> = list.map(({Name, ImageURL, url, Cost}) => {
+        return { id: count++, src: ImageURL, name: Name, cost: Cost, url: url }
+    })
+
+    this.setState({
+        data: items
+    })
+    console.log("List: ")
+    console.log(list) 
+  }
+
+  render() {
+    return (
+      <GridFlatList name="Wish List" data={this.state.data} />
+    )
+  }
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -112,5 +68,3 @@ const styles = StyleSheet.create({
       height: 1,
     },
   });
-
-export default Home;

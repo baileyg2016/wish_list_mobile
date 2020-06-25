@@ -19,8 +19,8 @@ export const authService = {
 
 function login(username, password) {
     console.log(REACT_APP_API_URL)
-    return axios.get(REACT_APP_API_URL, {
-        "username": username,
+    return axios.post(REACT_APP_API_URL, {
+        "email": username,
         "password": password
     }).then(handleResponse)
         .then(res => {

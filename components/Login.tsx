@@ -1,8 +1,4 @@
-import axios from 'axios';
-// import { Link, useHistory, withRouter } from 'react-router-native';
 import React, { Component, useState, useContext } from 'react';
-// import '../Login.css';
-// import { authService as auth } from '../_services/auth_user';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { AuthContext } from '../_contexts/Contexts';
 

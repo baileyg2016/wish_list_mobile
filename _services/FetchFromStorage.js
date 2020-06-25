@@ -1,4 +1,4 @@
-import { AsyncStorage } from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const FetchFromStorage = (() => {
     var _service;
@@ -26,7 +26,7 @@ const FetchFromStorage = (() => {
 
     const _clearToken = async () => {
         await AsyncStorage.removeItem(`access_token`);
-        await getAsyncStorage.removeItem(`refresh_token`);
+        await AsyncStorage.removeItem(`refresh_token`);
     }
 
     return {
