@@ -37,16 +37,6 @@ const styles = StyleSheet.create({
 export const GridFlatList = (props) => {
     return (
         <SafeAreaView>
-              <Text
-                style={{
-                padding: 16,
-                fontSize: 20,
-                color: 'grey',
-                textAlign: 'center'
-                // backgroundColor: 'green',
-                }}>
-                {props.name}
-            </Text>
             <FlatList
                 data={props.data}
                 renderItem={({ item }) => (

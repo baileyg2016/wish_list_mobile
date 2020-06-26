@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 import FetchUserData from '../_services/FetchUserData';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GridFlatList } from './GridFlatList';
+import Title from './Title';
 
 const { getWishList } = FetchUserData;
 
@@ -33,7 +34,34 @@ export default class Home extends Component<{}, {data: Array<{id: number, src: s
 
   render() {
     return (
-      <GridFlatList name="Wish List" data={this.state.data} />
+      <SafeAreaView>
+          <View style={{flexDirection: 'row', alignItems: "center"}}>
+            <Text
+                style={{
+                  padding: 16,
+                  fontSize: 20,
+                  color: 'grey',
+                  textAlign: 'center'
+                }}>
+                Wish List
+            </Text>
+
+            <TouchableOpacity>
+                <Text
+                  style={{
+                    color: '#89CFF0',
+                    textAlign: 'right',
+                    textAlignVertical: 'top',
+                    fontSize: 60,
+                    // paddingTop: -100
+                  }}>
+                  +
+                </Text>
+
+            </TouchableOpacity>
+          </View>
+        <GridFlatList data={this.state.data} />
+      </SafeAreaView>
     )
   }
 }

@@ -131,7 +131,7 @@ const App = () => {
             <Tab.Navigator>
               <Tab.Screen name="Profile" component={Profile} />
               <Tab.Screen 
-                name="Home"
+                name="Wish List"
                 component={Home}
                 /*options={{
                   headerRight: () => (

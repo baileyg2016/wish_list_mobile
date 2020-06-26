@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, FlatList, TouchableOpacity, 
 import { AuthContext } from '../_contexts/Contexts';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import Title from './Title';
 import FetchUserData from '../_services/FetchUserData';
 import { GridFlatList } from './GridFlatList';
 
@@ -26,11 +27,11 @@ export default class Friends extends Component<{}, {data: Array<Friend>}> {
     }
 
     async componentDidMount() {
-        let friends: Array<{pkUser: number, FirstName: string, LastName: string}> = await getFriends();
+        let friends: Array<{pkUser: number, FirstName: string, LastName: string, image_path: string}> = await getFriends();
 
         let count: number = 0;
-        let friendsList: Array<Friend> = friends.map(({pkUser, FirstName, LastName}) => {
-            return { id: count++, src: 'https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-9/28059171_2026321230982238_2645834501225872943_n.jpg?_nc_cat=104&_nc_sid=09cbfe&_nc_ohc=4meKDUGo3yYAX9cvF2G&_nc_ht=scontent-atl3-1.xx&oh=0aaf097118dfe181914a0d235ce8a1c8&oe=5F1B9908',  pk: pkUser, name: FirstName + ' ' + LastName}
+        let friendsList: Array<Friend> = friends.map(({pkUser, FirstName, LastName, image_path}) => {
+            return { id: count++, src: image_path,  pk: pkUser, name: FirstName + ' ' + LastName}
         })
         
         this.setState({
@@ -40,7 +41,10 @@ export default class Friends extends Component<{}, {data: Array<Friend>}> {
 
     render() {
         return (
-            <GridFlatList name="Friends" data={this.state.data} />
+            <SafeAreaView>
+                <Title name="Friends" />
+                <GridFlatList data={this.state.data} />
+            </SafeAreaView>
         );
     }
 };
