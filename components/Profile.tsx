@@ -15,8 +15,9 @@ const Profile = (props: any) => {
             {auth => (
                 <SafeAreaView>
                     <Title name="Profile" />
-                    <Button color="#8C55AA" title="Clear tokens" onPress={() => logoutClick(auth)} />
-                    <Text style={{alignItems: 'center', justifyContent: 'center' }}>You are on the Profile Page</Text>
+                    
+                    <Text style={{alignItems: 'center', justifyContent: 'center' }}></Text>
+                    <Button color="#8C55AA" title="Log Out" onPress={() => logoutClick(auth)} />
                 </SafeAreaView>
             )}
         </AuthContext.Consumer>

@@ -28,36 +28,40 @@ export default class Home extends Component<{}, {data: Array<{id: number, src: s
     this.setState({
         data: items
     })
-    console.log("List: ")
-    console.log(list) 
+    // console.log("List: ")
+    // console.log(list) 
   }
 
   render() {
     return (
       <SafeAreaView>
-          <View style={{flexDirection: 'row', alignItems: "center"}}>
-            <Text
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{flex: 1.3}}>
+              <Text
                 style={{
-                  padding: 16,
+                  padding: 20,
+                  paddingLeft: 100,
                   fontSize: 20,
                   color: 'grey',
                   textAlign: 'center'
                 }}>
                 Wish List
-            </Text>
+              </Text>
+            </View>
 
             <TouchableOpacity>
+              <View style={{flex: 1}}>
                 <Text
                   style={{
                     color: '#89CFF0',
                     textAlign: 'right',
-                    textAlignVertical: 'top',
                     fontSize: 60,
-                    // paddingTop: -100
+                    paddingRight: 30,
+                    bottom: 10
                   }}>
                   +
                 </Text>
-
+              </View>
             </TouchableOpacity>
           </View>
         <GridFlatList data={this.state.data} />

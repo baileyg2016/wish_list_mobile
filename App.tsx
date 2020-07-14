@@ -129,7 +129,6 @@ const App = () => {
             </Stack.Navigator>
           ) : (
             <Tab.Navigator>
-              <Tab.Screen name="Profile" component={Profile} />
               <Tab.Screen 
                 name="Wish List"
                 component={Home}
@@ -140,6 +139,7 @@ const App = () => {
                       title="Add Item"/>
                   ),
                 }} */ />
+              <Tab.Screen name="Profile" component={Profile} />
               <Tab.Screen name="Friends" component={Friends} />
             </Tab.Navigator>
           )}
