@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, FlatList, TouchableOpacity, 
 import { AuthContext } from '../_contexts/Contexts';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import Title from './Title';
+import Title from './Top';
 import FetchUserData from '../_services/FetchUserData';
 import { GridFlatList } from './GridFlatList';
 
@@ -42,7 +42,23 @@ export default class Friends extends Component<{}, {data: Array<Friend>}> {
     render() {
         return (
             <SafeAreaView>
-                <Title name="Friends" />
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={{flex: 1.3}}>
+                        <Title name="Friends" />
+                    </View>
+                    <TouchableOpacity>
+                        <View style={{flex: 1}}>
+                            <Image 
+                                source={require('../imgs/icons8-add-user-group-man-man-24.png')}
+                                style={{
+                                    right: 20,
+                                    top: 15
+                                }}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                
                 <GridFlatList data={this.state.data} />
             </SafeAreaView>
         );

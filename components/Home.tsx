@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import FetchUserData from '../_services/FetchUserData';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GridFlatList } from './GridFlatList';
-import Title from './Title';
+import Top from './Top';
 
 const { getWishList } = FetchUserData;
 
@@ -35,35 +35,7 @@ export default class Home extends Component<{}, {data: Array<{id: number, src: s
   render() {
     return (
       <SafeAreaView>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <View style={{flex: 1.3}}>
-              <Text
-                style={{
-                  padding: 20,
-                  paddingLeft: 100,
-                  fontSize: 20,
-                  color: 'grey',
-                  textAlign: 'center'
-                }}>
-                Wish List
-              </Text>
-            </View>
-
-            <TouchableOpacity>
-              <View style={{flex: 1}}>
-                <Text
-                  style={{
-                    color: '#89CFF0',
-                    textAlign: 'right',
-                    fontSize: 60,
-                    paddingRight: 30,
-                    bottom: 10
-                  }}>
-                  +
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+        <Top name="Wish List" imagePath={require('../imgs/icons8-add-24.png')} />  
         <GridFlatList data={this.state.data} />
       </SafeAreaView>
     )

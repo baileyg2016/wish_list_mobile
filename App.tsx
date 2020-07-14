@@ -10,6 +10,7 @@ import React, { Component, useState, useEffect, useReducer, createContext, useMe
 import {
   StyleSheet,
   Button,
+  Image,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -128,7 +129,21 @@ const App = () => {
               <Stack.Screen name="Register" component={Register} />
             </Stack.Navigator>
           ) : (
-            <Tab.Navigator>
+            <Tab.Navigator
+              screenOptions={({ route }) => ({
+                tabBarIcon: () => {
+                  if (route.name === 'Friends') {
+                    return <Image source={require('./imgs/icons8-friends-25.png')} />
+                  }
+                  else if (route.name === 'Profile') {
+                    return <Image source={require('./imgs/icons8-male-user-24.png')} />
+                  }
+                  else {
+                    return <Image source={require('./imgs/icons8-wish-list-24.png')} />
+                  }
+                }
+              })}
+            >
               <Tab.Screen 
                 name="Wish List"
                 component={Home}
@@ -139,8 +154,8 @@ const App = () => {
                       title="Add Item"/>
                   ),
                 }} */ />
-              <Tab.Screen name="Profile" component={Profile} />
               <Tab.Screen name="Friends" component={Friends} />
+              <Tab.Screen name="Profile" component={Profile} />
             </Tab.Navigator>
           )}
       </NavigationContainer>
