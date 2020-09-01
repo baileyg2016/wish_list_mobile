@@ -6,7 +6,8 @@
  * @flow strict-local
  */
 
-import React, { Component, useState, useEffect, useReducer, createContext, useMemo } from 'react';
+import React, { useState, useEffect, useReducer, createContext, useMemo, useCallback } from 'react';
+
 import {
   StyleSheet,
   Button,
@@ -19,22 +20,27 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { authService as auth } from './_services/auth_user';
 
 import { AuthContext } from './_contexts/Contexts';
-import { Login } from './components/Login';
+import { Login } from './components/login/Login';
 import FetchFromStorage from './_services/FetchFromStorage'
 import Register from './components/Register';
-import Home from './components/Home';
+import { ConnectedHome } from './components/home/ConnectedHome';
 import Profile from './components/Profile';
-import Friends from './components/Friends';
+import { ConnectedFriends} from './components/friends/ConnectedFriends';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { graphqlClient, clientPromise } from './graphql/client';
+import { SafeAreaView, Text } from 'react-native';
+// import { REACT_APP_API_URL, REACT_APP_GRAPHQL } from 'react-native-dotenv';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const { getAccessToken } = FetchFromStorage;
 
-
 const App = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const [state, dispatch] = useReducer(
     (prevState: any, action: any) => {
-      console.log(action)
+      console.log(`action: ${action}`)
       switch (action.type) {
         case 'RESTORE_TOKEN':
           return {
@@ -65,12 +71,12 @@ const App = () => {
 
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
-    console.log("here")
     const bootstrapAsync = async () => {
       let userToken;
-
+      await clientPromise();
+      
       try {
-        userToken = await getAccessToken;
+        userToken = await getAccessToken();
         console.log(userToken)
       } catch (e) {
         // Restoring token failed
@@ -81,6 +87,7 @@ const App = () => {
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
       dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+      setIsLoaded(true);
     };
 
     bootstrapAsync();
@@ -94,10 +101,9 @@ const App = () => {
         // After getting token, we need to persist the token using `AsyncStorage`
         // In the example, we'll use a dummy token
         
-        // let token = await auth.login(username, password);
-        // console.log(token)
+        // let token = ;
+        // console.log('token: ', token)
         dispatch({ type: 'SIGN_IN', token: await auth.login(username, password) });
-        // console.log(state.token)
       },
       logOut: () => {
         auth.logout();
@@ -120,46 +126,56 @@ const App = () => {
   // authContext.logOut();
   // state.token = null;
   console.log(state)
+  const renderApp = useCallback(() => {
+    return (
+      <ApolloProvider client={graphqlClient}>
+        <AuthContext.Provider value={authContext}>
+          {/* <NavigationContainer> */}
+              {state.token === null || state.token === undefined ? (
+                <Stack.Navigator>
+                  <Stack.Screen name="Login" component={Login} />
+                  <Stack.Screen name="Register" component={Register} />
+                </Stack.Navigator>
+              ) : (
+                <Tab.Navigator
+                  screenOptions={({ route }: any) => ({
+                    tabBarIcon: () => {
+                      if (route.name === 'Friends') {
+                        return <Image source={require('./imgs/icons8-friends-25.png')} />
+                      }
+                      else if (route.name === 'Profile') {
+                        return <Image source={require('./imgs/icons8-male-user-24.png')} />
+                      }
+                      else {
+                        return <Image source={require('./imgs/icons8-wish-list-24.png')} />
+                      }
+                    }
+                  })}
+                >
+                  <Tab.Screen 
+                    name="Wish List"
+                    component={ConnectedHome}
+                    /*options={{
+                      headerRight: () => (
+                        <Button 
+                          onPress={() => console.log('this will open a page to add something')}
+                          title="Add Item"/>
+                      ),
+                    }} */ />
+                  <Tab.Screen name="Friends" component={ConnectedFriends} />
+                  <Tab.Screen name="Profile" component={Profile} />
+                </Tab.Navigator>
+              )}
+          {/* </NavigationContainer> */}
+        </AuthContext.Provider>
+      </ApolloProvider>
+    )
+  }, [state]);
+
   return (
-    <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-          {state.token === null || state.token === undefined ? (
-            <Stack.Navigator>
-              <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Register" component={Register} />
-            </Stack.Navigator>
-          ) : (
-            <Tab.Navigator
-              screenOptions={({ route }) => ({
-                tabBarIcon: () => {
-                  if (route.name === 'Friends') {
-                    return <Image source={require('./imgs/icons8-friends-25.png')} />
-                  }
-                  else if (route.name === 'Profile') {
-                    return <Image source={require('./imgs/icons8-male-user-24.png')} />
-                  }
-                  else {
-                    return <Image source={require('./imgs/icons8-wish-list-24.png')} />
-                  }
-                }
-              })}
-            >
-              <Tab.Screen 
-                name="Wish List"
-                component={Home}
-                /*options={{
-                  headerRight: () => (
-                    <Button 
-                      onPress={() => console.log('this will open a page to add something')}
-                      title="Add Item"/>
-                  ),
-                }} */ />
-              <Tab.Screen name="Friends" component={Friends} />
-              <Tab.Screen name="Profile" component={Profile} />
-            </Tab.Navigator>
-          )}
-      </NavigationContainer>
-    </AuthContext.Provider>
+    <NavigationContainer>
+      { isLoaded ? renderApp() : <Text>Loading</Text>}
+    </NavigationContainer>
   );
 };
 

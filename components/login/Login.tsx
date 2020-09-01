@@ -1,6 +1,8 @@
-import React, { Component, useState, useContext } from 'react';
+import React, { useState, FC } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { AuthContext } from '../_contexts/Contexts';
+import { AuthContext } from '../../_contexts/Contexts';
+import { useQuery } from '@apollo/client';
+import { LOGIN } from '../../graphql/queries';
 
 const styles = StyleSheet.create({
     body: {
@@ -65,15 +67,18 @@ const styles = StyleSheet.create({
     },
 });
 
-export const Login = (props: any) => {
-    const loginClick = (auth: any) => {
-        auth.logIn(username, password);
-    }
-
-    const [username, setUsername] = useState('');
+export const Login: FC = (props: any) => {
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
+    const { data, loading, error } = useQuery(LOGIN, {
+        variables: { email, password }
+    });
 
+    const loginClick = (auth: any) => {
+        auth.logIn(error, data);
+    };
+    
     return (
         <AuthContext.Consumer>
             {auth => (
@@ -84,9 +89,9 @@ export const Login = (props: any) => {
                         <TextInput
                             textContentType="emailAddress"
                             style={styles.input}
-                            placeholder="Username"
-                            onChangeText={text => setUsername(text)}
-                            value={username} />
+                            placeholder="Email"
+                            onChangeText={text => setEmail(text)}
+                            value={email} />
                         <TextInput
                             secureTextEntry={true}
                             textContentType="password"

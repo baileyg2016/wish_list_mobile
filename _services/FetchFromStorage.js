@@ -17,7 +17,8 @@ const FetchFromStorage = (() => {
     }
 
     const  _getAccessToken = async () => {
-        return await AsyncStorage.getItem(`access_token`);
+        const token = await AsyncStorage.getItem(`access_token`);
+        return token;
     }
 
     const _getRefreshToken = async () => {
@@ -29,12 +30,38 @@ const FetchFromStorage = (() => {
         await AsyncStorage.removeItem(`refresh_token`);
     }
 
+    const _setName = async (first = "", last = "") => {
+        await AsyncStorage.setItem(`first_name`, first);
+        await AsyncStorage.setItem(`last_name`, last);
+    }
+
+    const _getFirstName = async () => {
+        return await AsyncStorage.getItem(`firstName`);
+    }
+
+    const _getLastName = async () => {
+        return await AsyncStorage.getItem(`lastName`);
+    }
+
+    const _setProfilePic = async (profilePic) => {
+        await AsyncStorage.setItem(`profile_pic`, profilePic)
+    }
+
+    // const  _getProfilePic = async () => {
+    //     return await require(AsyncStorage.getItem(`profile_pic`));
+    // }
+
     return {
         getService : _getService,
         setToken : _setToken,
         getAccessToken : _getAccessToken,
         getRefreshToken : _getRefreshToken,
-        clearToken : _clearToken
+        clearToken : _clearToken,
+        setName : _setName,
+        getFirstName : _getFirstName,
+        getLastName : _getLastName,
+        setProfilePic : _setProfilePic,
+        // getProfilePic : _getProfilePic
     }
 })();
 

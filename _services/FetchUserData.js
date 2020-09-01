@@ -1,32 +1,25 @@
-import axios from 'axios';
-import FetchFromStorage from './FetchFromStorage';
-import { REACT_APP_API_URL } from 'react-native-dotenv';
-
-const { getAccessToken } = FetchFromStorage;
+import { useQuery } from '@apollo/react-hooks';
+import { GET_ITEMS, FRIENDS } from '../graphql/queries';
 
 const FetchUserData = (() => {
     const _getWishList = async () => {
-        let token = await getAccessToken();
-        return axios.get(REACT_APP_API_URL + "getItems", {
-            headers: {
-                Authorization: token
-            }
-        }).then(res => {
-            console.log(res);
-            return res.data.items;
-        }).catch(err => console.log(err))
+        const { data, loading, error } = useQuery(GET_ITEMS);
+
+        if (error) {
+            console.error(error);
+        } else {
+            return { data, loading, error };
+        }
     }
 
     const _getFriends = async () => {
-        let token = await getAccessToken();
-        return axios.get(REACT_APP_API_URL + "friends", {
-            headers: {
-                Authorization: token
-            }
-        }).then(res => {
-            console.log(res);
-            return res.data.friends;
-        }).catch(err => console.log(err))
+        const { data, loading, error } = useQuery(FRIENDS);
+
+        if (error) {
+            console.error(error);
+        } else {
+            return { data, loading, error };
+        }
     }
 
     return {

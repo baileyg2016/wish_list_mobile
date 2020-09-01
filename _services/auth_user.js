@@ -1,11 +1,11 @@
-import axios from 'axios';
 import { BehaviorSubject } from 'rxjs';
-import { handleResponse } from '../_helpers';
-import { REACT_APP_API_URL } from 'react-native-dotenv';
 import FetchFromStorage from './FetchFromStorage';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { LOGIN } from '../graphql/queries';
+import { REGISTER } from '../graphql/mutations';
 
 const currUserSubject = new BehaviorSubject();
-const { setToken, clearToken } = FetchFromStorage;
+const { setToken, clearToken, setName } = FetchFromStorage;
 
 export const authService = {
     login,
@@ -17,43 +17,37 @@ export const authService = {
 
 
 
-function login(username, password) {
-    console.log(REACT_APP_API_URL)
-    return axios.post(REACT_APP_API_URL, {
-        "email": username,
-        "password": password
-    }).then(handleResponse)
-        .then(res => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            setToken(res.jwt);
-            console.log(res)
-            if (res === undefined) {
-                return null;
-            }
-            
-            currUserSubject.next(res.jwt);
-            
-            return res.jwt;
-        });
+function login(error, data) {
+    if (error) {
+        console.error(`Error: ${error}`);
+        return null;
+    } else {
+        setToken(data.login.jwt);
+        setName(data.login.firstName, data.login.lastName);
+        currUserSubject.next(data.login.jwt);
+    }
+    console.log(data.login.jwt)
+    return data.login.jwt;
 }
 
-function register(firstName, lastName, username, password) {
-    return axios.post(REACT_APP_API_URL + "register", {
-        firstName: firstName,
-        lastName: lastName,
-        email: username,
-        password: password
-    }).then(handleResponse).then(
-        res => {
-            console.log(res)
-            if (res) {
-                currUserSubject.next(res.jwt);
-                setToken(res.jwt);
-                return res.jwt;
-            }
-            return null;
-        }
-    )
+function register(firstName, lastName, email, password) {
+    const [register, { data, error }] = useMutation(REGISTER);
+    register({ variables: {
+        firstName,
+        lastName,
+        email,
+        password
+    }});
+
+    if (error) {
+        console.error(error);
+    } else {
+        currUserSubject.next(data.jwt);
+        setToken(data.jwt);
+        setName(firstName, lastName);
+    }
+
+    return { jwt: data.jwt }
 }
 
 function logout() {
