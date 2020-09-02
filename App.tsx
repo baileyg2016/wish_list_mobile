@@ -6,11 +6,10 @@
  * @flow strict-local
  */
 
-import React, { useState, useEffect, useReducer, createContext, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useReducer, useMemo, useCallback } from 'react';
 
 import {
   StyleSheet,
-  Button,
   Image,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -22,14 +21,13 @@ import { authService as auth } from './_services/auth_user';
 import { AuthContext } from './_contexts/Contexts';
 import { Login } from './components/login/Login';
 import FetchFromStorage from './_services/FetchFromStorage'
-import Register from './components/Register';
+import Register from './components/login/Register';
 import { ConnectedHome } from './components/home/ConnectedHome';
 import Profile from './components/Profile';
 import { ConnectedFriends} from './components/friends/ConnectedFriends';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 import { graphqlClient, clientPromise } from './graphql/client';
-import { SafeAreaView, Text } from 'react-native';
-// import { REACT_APP_API_URL, REACT_APP_GRAPHQL } from 'react-native-dotenv';
+import { Text } from 'react-native';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -121,16 +119,11 @@ const App = () => {
     }),
     []
   );
-
-  // AsyncStorage.clear();
-  // authContext.logOut();
-  // state.token = null;
-  console.log(state)
+  
   const renderApp = useCallback(() => {
     return (
       <ApolloProvider client={graphqlClient}>
         <AuthContext.Provider value={authContext}>
-          {/* <NavigationContainer> */}
               {state.token === null || state.token === undefined ? (
                 <Stack.Navigator>
                   <Stack.Screen name="Login" component={Login} />
@@ -166,7 +159,6 @@ const App = () => {
                   <Tab.Screen name="Profile" component={Profile} />
                 </Tab.Navigator>
               )}
-          {/* </NavigationContainer> */}
         </AuthContext.Provider>
       </ApolloProvider>
     )

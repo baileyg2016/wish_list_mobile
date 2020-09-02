@@ -1,6 +1,9 @@
+import { IGridListItem } from "../gridItemList/IGridListDataProps.types";
 
 export interface IFriendsDataProps {
-    friends: Array<IFriend>
+    friends: Array<IFriend>,
+    onFriendPress: (item: IGridListItem) => void,
+    refetch: () => void,
 }
 
 export interface IFriend {

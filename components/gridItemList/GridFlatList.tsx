@@ -1,12 +1,19 @@
-import React from "react"
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
-import { SafeAreaView, Text, View, Image, StyleSheet } from "react-native"
-import AsyncStorage from '@react-native-community/async-storage';
+import React, { FC } from "react"
+import { 
+  SafeAreaView, 
+  Text, 
+  View, 
+  Image, 
+  StyleSheet, 
+  FlatList, 
+  TouchableOpacity 
+} from "react-native"
+import { wait } from '../../_helpers/utils';
+import { IGridListDataProps } from "./IGridListDataProps.types";
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      marginTop: 30,
+    list: {
+      height: '100%'
     },
     image: {
       height: 120,
@@ -34,25 +41,37 @@ const styles = StyleSheet.create({
     },
 });
 
-export const GridFlatList = (props) => {
+export const GridFlatList: FC<IGridListDataProps> = ({ data, onPress, refetch }) => {
   const defaultImage = 'https://www.bing.com/images/search?view=detailV2&ccid=0CTqweoE&id=5B9FD8FDD5804CC74EE702886571FEF307A76664&thid=OIP.0CTqweoEjBUNF3lZrhS6egAAAA&mediaurl=http%3a%2f%2fwww.gogiltech.com%2fuploads%2f9%2f0%2f3%2f5%2f9035061%2fs260393869697676086_p170_i2_w416.jpeg&exph=408&expw=416&q=ball+in+hand+gotcha&simid=608025643885725499&ck=A341F28D37862BEE9FFF51C3BC89F21A&selectedIndex=1&FORM=IRPRST';
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    console.log('refreshing')
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+  
   return (
       <SafeAreaView>
           <FlatList
-              data={props.data}
+              style={styles.list}
+              data={data}
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              numColumns={2}
+              keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
                   <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
                       <TouchableOpacity
                         key={item.id}
                         style={{ flex: 1 }}
-                        onPress={async () => {
-                          console.log( await AsyncStorage.getItem('access_token'))
-                        }}
+                        onPress={() => onPress(item)}
                       >
                       <Image
                           style={styles.image}
                           source={{
-                              uri: item.src,
+                              uri: item.src ?? defaultImage,
                           }}
                       />
                       <Text
@@ -70,9 +89,6 @@ export const GridFlatList = (props) => {
                       </TouchableOpacity>
                   </View>
               )}
-              //Setting the number of column
-              numColumns={2}
-              keyExtractor={(item, index) => index.toString()}
           />
       </SafeAreaView>
     )

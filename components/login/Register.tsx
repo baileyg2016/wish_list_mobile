@@ -1,8 +1,8 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 // import '../Login.css';
 
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { AuthContext } from '../_contexts/Contexts';
+import { AuthContext } from '../../_contexts/Contexts';
 
 const styles = StyleSheet.create({
     body: {

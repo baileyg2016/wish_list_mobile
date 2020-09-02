@@ -1,13 +1,18 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import {Friends } from './Friends';
 import { useQuery } from '@apollo/react-hooks';
 import { FRIENDS } from '../../graphql/queries';
 import { IFriendsDataProps, IFriend } from './IFriends.types';
-import { IGridListDataProps } from '../IGridListDataProps.types';
 import { Text } from 'react-native';
+import { IGridListItem } from '../gridItemList/IGridListDataProps.types';
 
 export const ConnectedFriends: FC<IFriendsDataProps> = () => {
-    const { data, loading, error } = useQuery(FRIENDS);
+    const { data, loading, error, refetch } = useQuery(FRIENDS);
+
+    const onFriendPress = (item: IGridListItem) => {
+        console.log('clicked friend with pk: ', item.pk);
+    }
+
     if (error) {
         console.error(error);
     }
@@ -19,6 +24,6 @@ export const ConnectedFriends: FC<IFriendsDataProps> = () => {
     const friends = data.friends as Array<IFriend>;
     console.log(friends)
     return (
-        <Friends friends={friends} />
+        <Friends friends={friends} onFriendPress={onFriendPress} refetch={refetch}/>
     )
 }

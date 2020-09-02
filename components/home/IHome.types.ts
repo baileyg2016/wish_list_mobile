@@ -1,3 +1,5 @@
+import { IGridListItem } from "../gridItemList/IGridListDataProps.types";
+
 export interface IItem {
     pkItem: number,
     name: string,
@@ -8,5 +10,7 @@ export interface IItem {
 }
 
 export interface IHomeDataProps {
-    items: Array<IItem>
+    items: Array<IItem>,
+    onItemPress: (item: IGridListItem) => void,
+    refetch: () => void,
 }

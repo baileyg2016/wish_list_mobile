@@ -9,3 +9,9 @@ const testImages = [
 export const getRandomImage = () => {
     return `file:////Users/BaileySpell/repos/wish_list/mobileApp/${testImages[Math.floor(Math.random() * 4)]}`;
 }
+
+export const wait = (timeout) => {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  }
