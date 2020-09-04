@@ -29,6 +29,7 @@
     "react-native-reanimated": "^1.9.0",
     "react-native-safe-area-context": "^3.0.3",
     "react-native-screens": "^2.8.0",
+    "react-native-share-menu": "^5.0.1",
     "react-router-native": "^5.2.0",
     "rxjs": "^6.5.5"
   },

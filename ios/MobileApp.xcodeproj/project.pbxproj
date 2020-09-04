@@ -18,6 +18,10 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* MobileAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MobileAppTests.m */; };
 		4CEDE37A916042CE6BD806A7 /* libPods-MobileApp-MobileAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2306EEF45247DE70BD283B6 /* libPods-MobileApp-MobileAppTests.a */; };
+		61D043762501CC11002C2B74 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61D043742501CC11002C2B74 /* MainInterface.storyboard */; };
+		61D0437A2501CC11002C2B74 /* WishListShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 61D043702501CC11002C2B74 /* WishListShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		61D043812501CE98002C2B74 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D043802501CE98002C2B74 /* ShareViewController.swift */; };
+		8A2F5AB1AE5B7AC5A18AC094 /* libPods-WishListShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB8006DB2596913D298864D /* libPods-WishListShare.a */; };
 		BAB6E82F1C8BB0A0C88727DE /* libPods-MobileApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63555E838FCC07E48B554158 /* libPods-MobileApp-tvOS.a */; };
 		E1AF2618C18A495C50BC0402 /* libPods-MobileApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BE76C5C4FAE41DDD7779F5 /* libPods-MobileApp.a */; };
 /* End PBXBuildFile section */
@@ -37,7 +41,28 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "MobileApp-tvOS";
 		};
+		61D043782501CC11002C2B74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 61D0436F2501CC11002C2B74;
+			remoteInfo = WishListShare;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		61D0437B2501CC11002C2B74 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				61D0437A2501CC11002C2B74 /* WishListShare.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00810BC50AAC1AFA483FE9E1 /* Pods-MobileApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileApp.release.xcconfig"; path = "Target Support Files/Pods-MobileApp/Pods-MobileApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -58,6 +83,14 @@
 		28A6CC7DA9A4B920DCC365CF /* Pods-MobileApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-MobileApp-tvOSTests/Pods-MobileApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* MobileApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MobileApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* MobileApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MobileApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E5C0027170EDF638747C3EF /* Pods-WishListShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WishListShare.release.xcconfig"; path = "Target Support Files/Pods-WishListShare/Pods-WishListShare.release.xcconfig"; sourceTree = "<group>"; };
+		61D043702501CC11002C2B74 /* WishListShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WishListShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		61D043752501CC11002C2B74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		61D043772501CC11002C2B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61D0437F2501CE98002C2B74 /* WishListShare-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WishListShare-Bridging-Header.h"; sourceTree = "<group>"; };
+		61D043802501CE98002C2B74 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareViewController.swift; path = "../../node_modules/react-native-share-menu/ios/ShareViewController.swift"; sourceTree = "<group>"; };
+		61D043822501CFCA002C2B74 /* MobileApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MobileApp.entitlements; path = MobileApp/MobileApp.entitlements; sourceTree = "<group>"; };
+		61D043832501D178002C2B74 /* WishListShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WishListShare.entitlements; sourceTree = "<group>"; };
 		63555E838FCC07E48B554158 /* libPods-MobileApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MobileApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		657B6A72297B83BBBD3D1B61 /* Pods-MobileApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-MobileApp-tvOS/Pods-MobileApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		71DC63BE7810D79C1AC616C1 /* Pods-MobileApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-MobileApp-tvOSTests/Pods-MobileApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -65,8 +98,10 @@
 		7D7BEDCC61BF2603551EF414 /* Pods-MobileApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-MobileApp-tvOS/Pods-MobileApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		A0BE76C5C4FAE41DDD7779F5 /* libPods-MobileApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MobileApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2306EEF45247DE70BD283B6 /* libPods-MobileApp-MobileAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MobileApp-MobileAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E66F922B0B542EFB658574D4 /* Pods-WishListShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WishListShare.debug.xcconfig"; path = "Target Support Files/Pods-WishListShare/Pods-WishListShare.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		FCB8006DB2596913D298864D /* libPods-WishListShare.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WishListShare.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +137,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		61D0436D2501CC11002C2B74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A2F5AB1AE5B7AC5A18AC094 /* libPods-WishListShare.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -125,6 +168,7 @@
 		13B07FAE1A68108700A75B9A /* MobileApp */ = {
 			isa = PBXGroup;
 			children = (
+				61D043822501CFCA002C2B74 /* MobileApp.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -145,8 +189,21 @@
 				E2306EEF45247DE70BD283B6 /* libPods-MobileApp-MobileAppTests.a */,
 				63555E838FCC07E48B554158 /* libPods-MobileApp-tvOS.a */,
 				18D7908CA4779119FC54370F /* libPods-MobileApp-tvOSTests.a */,
+				FCB8006DB2596913D298864D /* libPods-WishListShare.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		61D043712501CC11002C2B74 /* WishListShare */ = {
+			isa = PBXGroup;
+			children = (
+				61D043832501D178002C2B74 /* WishListShare.entitlements */,
+				61D043802501CE98002C2B74 /* ShareViewController.swift */,
+				61D043742501CC11002C2B74 /* MainInterface.storyboard */,
+				61D043772501CC11002C2B74 /* Info.plist */,
+				61D0437F2501CE98002C2B74 /* WishListShare-Bridging-Header.h */,
+			);
+			path = WishListShare;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -162,6 +219,7 @@
 				13B07FAE1A68108700A75B9A /* MobileApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MobileAppTests */,
+				61D043712501CC11002C2B74 /* WishListShare */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBE0C9337DD2A8D9EE06BAEB /* Pods */,
@@ -178,6 +236,7 @@
 				00E356EE1AD99517003FC87E /* MobileAppTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* MobileApp-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* MobileApp-tvOSTests.xctest */,
+				61D043702501CC11002C2B74 /* WishListShare.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -193,8 +252,9 @@
 				7D7BEDCC61BF2603551EF414 /* Pods-MobileApp-tvOS.release.xcconfig */,
 				71DC63BE7810D79C1AC616C1 /* Pods-MobileApp-tvOSTests.debug.xcconfig */,
 				28A6CC7DA9A4B920DCC365CF /* Pods-MobileApp-tvOSTests.release.xcconfig */,
+				E66F922B0B542EFB658574D4 /* Pods-WishListShare.debug.xcconfig */,
+				3E5C0027170EDF638747C3EF /* Pods-WishListShare.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -230,10 +290,12 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				61D0437B2501CC11002C2B74 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				61D043792501CC11002C2B74 /* PBXTargetDependency */,
 			);
 			name = MobileApp;
 			productName = MobileApp;
@@ -279,12 +341,31 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* MobileApp-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		61D0436F2501CC11002C2B74 /* WishListShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61D0437E2501CC11002C2B74 /* Build configuration list for PBXNativeTarget "WishListShare" */;
+			buildPhases = (
+				7F8CD72FCBE4125F88699EC2 /* [CP] Check Pods Manifest.lock */,
+				61D0436C2501CC11002C2B74 /* Sources */,
+				61D0436D2501CC11002C2B74 /* Frameworks */,
+				61D0436E2501CC11002C2B74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WishListShare;
+			productName = WishListShare;
+			productReference = 61D043702501CC11002C2B74 /* WishListShare.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1170;
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -292,6 +373,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = JTLMSC2X6D;
 						LastSwiftMigration = 1120;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -302,6 +384,12 @@
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
+					};
+					61D0436F2501CC11002C2B74 = {
+						CreatedOnToolsVersion = 11.7;
+						DevelopmentTeam = JTLMSC2X6D;
+						LastSwiftMigration = 1170;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -322,6 +410,7 @@
 				00E356ED1AD99517003FC87E /* MobileAppTests */,
 				2D02E47A1E0B4A5D006451C7 /* MobileApp-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* MobileApp-tvOSTests */,
+				61D0436F2501CC11002C2B74 /* WishListShare */,
 			);
 		};
 /* End PBXProject section */
@@ -355,6 +444,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61D0436E2501CC11002C2B74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61D043762501CC11002C2B74 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +502,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-MobileApp-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F8CD72FCBE4125F88699EC2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WishListShare-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -552,6 +671,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		61D0436C2501CC11002C2B74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61D043812501CE98002C2B74 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -565,6 +692,11 @@
 			target = 2D02E47A1E0B4A5D006451C7 /* MobileApp-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
+		61D043792501CC11002C2B74 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 61D0436F2501CC11002C2B74 /* WishListShare */;
+			targetProxy = 61D043782501CC11002C2B74 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -575,6 +707,14 @@
 			);
 			name = LaunchScreen.xib;
 			path = MobileApp;
+			sourceTree = "<group>";
+		};
+		61D043742501CC11002C2B74 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				61D043752501CC11002C2B74 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -627,22 +767,26 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1E324E6D8815D4C000D3A4E9 /* Pods-MobileApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MobileApp/MobileApp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JTLMSC2X6D;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = MobileApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.WishListKeeper;
 				PRODUCT_NAME = MobileApp;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -654,17 +798,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00810BC50AAC1AFA483FE9E1 /* Pods-MobileApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MobileApp/MobileApp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JTLMSC2X6D;
 				INFOPLIST_FILE = MobileApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.WishListKeeper;
 				PRODUCT_NAME = MobileApp;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -778,6 +926,69 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MobileApp-tvOS.app/MobileApp-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Release;
+		};
+		61D0437C2501CC11002C2B74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E66F922B0B542EFB658574D4 /* Pods-WishListShare.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = WishListShare/WishListShare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = JTLMSC2X6D;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WishListShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.MobileApp.WishListShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "WishListShare/WishListShare-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		61D0437D2501CC11002C2B74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E5C0027170EDF638747C3EF /* Pods-WishListShare.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = WishListShare/WishListShare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = JTLMSC2X6D;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WishListShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.MobileApp.WishListShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WishListShare/WishListShare-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -929,6 +1140,15 @@
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
 				2D02E49A1E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61D0437E2501CC11002C2B74 /* Build configuration list for PBXNativeTarget "WishListShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61D0437C2501CC11002C2B74 /* Debug */,
+				61D0437D2501CC11002C2B74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

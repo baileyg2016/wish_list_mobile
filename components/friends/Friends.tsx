@@ -7,7 +7,13 @@ import { GridFlatList } from '../gridItemList/GridFlatList';
 import { IFriendsDataProps } from './IFriends.types';
 import { getRandomImage } from '../../_helpers/utils';
 
-export const Friends: FC<IFriendsDataProps> = ({ friends, onFriendPress, refetch }) => {
+export const Friends: FC<IFriendsDataProps> = (
+    { 
+        friends,
+        onFriendPress, 
+        refetch,
+        onAddFriendPress
+    }) => {
     const friendsList = friends.map(({pkUser, firstName, lastName, image_path}) => {
         console.log(getRandomImage())
         return { id: pkUser, src: getRandomImage(),  pk: pkUser, name: firstName + ' ' + lastName}
@@ -18,7 +24,9 @@ export const Friends: FC<IFriendsDataProps> = ({ friends, onFriendPress, refetch
                 <View style={{flex: 1.3}}>
                     <Title name="Friends" />
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={onAddFriendPress}
+                >
                     <View style={{flex: 1}}>
                         <Image 
                             source={require('../../imgs/icons8-add-user-group-man-man-24.png')}

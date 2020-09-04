@@ -1,5 +1,3 @@
-import { GestureResponderEvent } from "react-native";
-
 export enum IGridContexts {
     Home,
     Friends

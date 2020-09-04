@@ -13,6 +13,10 @@ export const ConnectedFriends: FC<IFriendsDataProps> = () => {
         console.log('clicked friend with pk: ', item.pk);
     }
 
+    const onAddFriendPress = () => {
+        
+    }
+
     if (error) {
         console.error(error);
     }
@@ -24,6 +28,11 @@ export const ConnectedFriends: FC<IFriendsDataProps> = () => {
     const friends = data.friends as Array<IFriend>;
     console.log(friends)
     return (
-        <Friends friends={friends} onFriendPress={onFriendPress} refetch={refetch}/>
+        <Friends 
+            friends={friends}
+            onFriendPress={onFriendPress}
+            refetch={refetch}
+            onAddFriendPress={onAddFriendPress}
+        />
     )
 }
