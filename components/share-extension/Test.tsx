@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { AppRegistry, Text, View, Image, Button } from "react-native";
+// @ts-ignore
 import ShareMenu, { ShareMenuReactView } from "react-native-share-menu";
 
 type SharedItem = {
@@ -9,10 +10,10 @@ type SharedItem = {
 };
 
 const Test = () => {
-  const [sharedData, setSharedData] = useState(null);
-  const [sharedMimeType, setSharedMimeType] = useState(null);
+  const [sharedData, setSharedData] = useState('');
+  const [sharedMimeType, setSharedMimeType] = useState('');
 
-  const handleShare = useCallback((item: ?SharedItem) => {
+  const handleShare = useCallback((item?: SharedItem) => {
     if (!item) {
       return;
     }
@@ -71,6 +72,7 @@ const Share = () => {
   const [sharedMimeType, setSharedMimeType] = useState("");
 
   useEffect(() => {
+    // @ts-ignore
     ShareMenuReactView.data().then(({ mimeType, data }) => {
       setSharedData(data);
       setSharedMimeType(mimeType);

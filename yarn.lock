@@ -1348,6 +1348,11 @@
   resolved "https://registry.yarnpkg.com/@types/react-native-dotenv/-/react-native-dotenv-0.2.0.tgz#32c58422a422c1adf68acce363ed791314d5a8e7"
   integrity sha512-ZxX+dU/yoQc0jTk+/NWttkiuXceJyN5FpOSqDl0WynN5GDzxwH7OMruQ47qcY8llo2RD3irjvzJ9BwC8gDiq0A==
 
+"@types/react-native-share-menu@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native-share-menu/-/react-native-share-menu-2.2.0.tgz#17d9f50d22e6fcec3dfcd2d96203ef7e6bbb4fa9"
+  integrity sha512-f4WxVURXESn4wSJSorSyDMHYrAktWuz9kJtP0L3d23N6LVOnnbZW8K7CkdhylVsoWFBvFbeb1VDMX70gpa7sFg==
+
 "@types/react-native@^0.62.13":
   version "0.62.18"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.62.18.tgz#ad63691e7c44edef2beeb6af52b2eb942c3ed8a1"
