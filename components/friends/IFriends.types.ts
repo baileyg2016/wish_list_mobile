@@ -4,6 +4,7 @@ export interface IFriendsDataProps {
     friends: Array<IFriend>,
     onFriendPress: (item: IGridListItem) => void,
     refetch: () => void,
+    onAddNewFriend: () => void,
 }
 
 export interface IFriend {
