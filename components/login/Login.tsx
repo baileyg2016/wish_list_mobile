@@ -18,10 +18,7 @@ const styles = StyleSheet.create({
         paddingBottom: 30,
         alignItems: "center",
         width: "90%",
-        // height: "400px",
-        // margin: "auto",
         borderRadius: 25,
-        // boxShadow: "0px 11px 35px 2px rgba(0, 0, 0, 0.14)",
     },
 
     title: {
@@ -37,27 +34,18 @@ const styles = StyleSheet.create({
         color: "#263238",
         fontWeight: "700",
         fontSize: 14,
-        // color: 'black',
-        // letterpacing: 1px,
         backgroundColor: "#e6e6e6",
-        // opacity: 0.04,
         paddingTop: 10,
         paddingBottom: 10,
         paddingRight: 20,
         paddingLeft: 20,
-        // border: "none",
         borderRadius: 20,
-        // outline: "none",
-        // boxSizing: "border-box",
         borderWidth: 2,
         borderStyle: "solid",
         borderColor: "transparent",
         marginTop: 15,
         marginBottom: 15,
-        /* margin-left: 46px, */
         textAlign: "center",
-        // marginBottom: 27,
-        // font-family: 'Ubuntu', sans-serif,
     },
     forgotAndRegister: {
         // textShadow: 0px 0px 3px rgba(117, 117, 117, 0.12),
@@ -91,14 +79,16 @@ export const Login: FC = (props: any) => {
                             style={styles.input}
                             placeholder="Email"
                             onChangeText={text => setEmail(text)}
-                            value={email} />
+                            value={email}
+                        />
                         <TextInput
                             secureTextEntry={true}
                             textContentType="password"
                             style={styles.input}
                             placeholder="Password"
                             onChangeText={text => setPassword(text)}
-                            value={password} />
+                            value={password}
+                        />
                         <Button color="#8C55AA" title="Sign in" onPress={() => loginClick(auth)}/>
                         {/* <Text style={styles.forgotAndRegister}>Forgot Password?</Text> */}
                         <Text style={styles.forgotAndRegister} onPress={() => props.navigation.navigate("Register")}>Register</Text>
