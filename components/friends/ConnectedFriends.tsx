@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { Friends } from './Friends';
 import { useQuery } from '@apollo/react-hooks';
 import { FRIENDS } from '../../graphql/queries';
@@ -7,6 +7,7 @@ import { Text } from 'react-native';
 import { IGridListItem } from '../gridItemList/IGridListDataProps.types';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AddNewFriend } from './AddNewFriend';
+import debounce from 'lodash/debounce';
 
 export const ConnectedFriends: FC<IFriendsDataProps> = (props: any) => {
     const { data, loading, error, refetch } = useQuery(FRIENDS);
@@ -27,6 +28,10 @@ export const ConnectedFriends: FC<IFriendsDataProps> = (props: any) => {
     const onAddNewFriend = () => {
         props.navigation.navigate('AddNewFriend');
     }
+
+    const onSearch = (searchInput: string) => {
+        console.log(searchInput);
+    };
     
     const friends = data.friends as Array<IFriend>;
 
@@ -45,7 +50,7 @@ export const ConnectedFriends: FC<IFriendsDataProps> = (props: any) => {
                 }
             </Stack.Screen>
             <Stack.Screen name='AddNewFriend'>
-                { props => <AddNewFriend /> }
+                { props => <AddNewFriend onSearch={onSearch} /> }
             </Stack.Screen>
         </Stack.Navigator>
     )

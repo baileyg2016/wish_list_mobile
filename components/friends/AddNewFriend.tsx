@@ -1,11 +1,13 @@
-import React, { FC } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { FC, useState } from 'react';
 import { Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { IAddNewFriendsDataProps } from './IAddNewFriend.types';
 
-export const AddNewFriend: FC = () => {
+export const AddNewFriend: FC<IAddNewFriendsDataProps> = ({ onSearch }) => {
+    const [search, setSearch] = useState('');
     return (
         <SafeAreaView>
-            <Text>New Friend Page</Text>
+            <Text>Working</Text>
         </SafeAreaView>
     );
 };
