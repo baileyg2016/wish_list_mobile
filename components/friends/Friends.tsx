@@ -12,7 +12,7 @@ export const Friends: FC<IFriendsDataProps> = (
         friends, 
         onFriendPress, 
         refetch, 
-        onAddNewFriend 
+        onAddNewFriend
     }) => {
     const friendsList = friends.map(({pkUser, firstName, lastName, image_path}) => {
         console.log(getRandomImage())
