@@ -302,13 +302,13 @@ PODS:
     - React
   - RNCMaskedView (0.1.10):
     - React
-  - RNGestureHandler (1.7.0):
+  - RNGestureHandler (1.6.1):
     - React
   - RNKeychain (6.1.1):
     - React
-  - RNReanimated (1.13.0):
+  - RNReanimated (1.9.0):
     - React
-  - RNScreens (2.10.1):
+  - RNScreens (2.8.0):
     - React
   - RNVectorIcons (7.1.0):
     - React
