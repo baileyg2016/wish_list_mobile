@@ -1,4 +1,4 @@
-import { GestureResponderEvent } from "react-native";
+import { IFriend } from "../friends/IFriends.types";
 
 export enum IGridContexts {
     Home,

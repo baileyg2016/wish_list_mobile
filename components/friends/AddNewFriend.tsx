@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export const AddNewFriend: FC<IAddNewFriendsDataProps> = () => {
+export const AddNewFriend: FC<IAddNewFriendsDataProps> = ({ addNewFriend }) => {
     const [search, setSearch] = useState('');
     const { 
         data, 
@@ -49,7 +49,7 @@ export const AddNewFriend: FC<IAddNewFriendsDataProps> = () => {
     };
 
     const renderFriend = ({ item }: any) => {
-        return <ListItem item={item} />
+        return <ListItem item={item} onPress={addNewFriend}/>
     };
 
     return (

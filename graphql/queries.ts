@@ -46,3 +46,16 @@ export const SEARCH_FOR_FRIENDS = gql`
         }
     }
 `;
+
+export const FRIENDS_ITEMS = gql`
+    query GetFriendsWishList($pkFriend: Int!) {
+        getFriendsWishList(pkFriend: $pkFriend) {
+            pkItem
+            name
+            url
+            imageURL
+            cost
+            size
+        }
+    }
+`;

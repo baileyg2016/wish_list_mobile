@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IListItemDataProps } from './IListItem.types';
 import { Card } from 'react-native-elements';
-import { Image, Text, View } from 'react-native';
+import { Button, Image, Text, View } from 'react-native';
 import { getRandomImage } from '../../_helpers/utils';
 
 export const ListItem: FC<IListItemDataProps> = ({ item }) => {
@@ -17,6 +17,10 @@ export const ListItem: FC<IListItemDataProps> = ({ item }) => {
                 <Text /*style={styles.name}*/>
                     {item.firstName + ' ' + item.lastName}
                 </Text>
+                <Button
+                    onPress={() => console.log("clicked")}
+                    title="Add"
+                />
             </View>
         </Card>
     );

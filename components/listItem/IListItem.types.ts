@@ -1,3 +1,5 @@
+import { IFriend } from "../friends/IFriends.types";
+
 export interface IListInfo {
     pk: number,
     firstName: string,
@@ -8,4 +10,5 @@ export interface IListInfo {
 
 export interface IListItemDataProps {
     item: IListInfo
+    onPress: (item: IFriend) => void;
 }

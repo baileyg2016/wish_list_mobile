@@ -302,13 +302,13 @@ PODS:
     - React
   - RNCMaskedView (0.1.10):
     - React
-  - RNGestureHandler (1.6.1):
+  - RNGestureHandler (1.7.0):
     - React
   - RNKeychain (6.1.1):
     - React
-  - RNReanimated (1.9.0):
+  - RNReanimated (1.13.0):
     - React
-  - RNScreens (2.8.0):
+  - RNScreens (2.10.1):
     - React
   - RNVectorIcons (7.1.0):
     - React
@@ -506,6 +506,6 @@ SPEC CHECKSUMS:
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 00602de7b72e9be57aa4f26743c4b98a52600ec6
+PODFILE CHECKSUM: 00a2e0a50a7f111e6a2941b7bdbee01022b94e54
 
 COCOAPODS: 1.8.4

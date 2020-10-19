@@ -2,7 +2,7 @@ import { IGridListItem } from "../gridItemList/IGridListDataProps.types";
 
 export interface IFriendsDataProps {
     friends: Array<IFriend>,
-    onFriendPress: (item: IGridListItem) => void,
+    onFriendPress: (pkFriend: IGridListItem) => void,
     refetch: () => void,
     onAddNewFriend: () => void,
 }
@@ -12,4 +12,8 @@ export interface IFriend {
     firstName: string, 
     lastName: string, 
     image_path: string
+}
+
+export interface IFriendsWishListDataProps {
+    
 }
