@@ -6,7 +6,7 @@ import { SEARCH_FOR_FRIENDS } from '../../graphql/queries';
 import { IAddNewFriendsDataProps } from './IAddNewFriend.types';
 import debounce from 'lodash/debounce';
 import { FlatList } from 'react-native-gesture-handler';
-import { ListItem } from '../listItem/ListItem';
+import { ListItem } from '../ListItem/ListItem';
 
 const styles = StyleSheet.create({
     search: {
@@ -49,7 +49,7 @@ export const AddNewFriend: FC<IAddNewFriendsDataProps> = ({ addNewFriend }) => {
     };
 
     const renderFriend = ({ item }: any) => {
-        return <ListItem item={item} onPress={addNewFriend}/>
+        return <ListItem item={item} onAddNewFriend={addNewFriend} />
     };
 
     return (

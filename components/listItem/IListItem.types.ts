@@ -9,6 +9,6 @@ export interface IListInfo {
 }
 
 export interface IListItemDataProps {
-    item: IListInfo
-    onPress: (item: IFriend) => void;
+    item: IFriend
+    onAddNewFriend: (friend: IFriend) => void;
 }

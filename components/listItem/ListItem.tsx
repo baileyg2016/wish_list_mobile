@@ -3,8 +3,9 @@ import { IListItemDataProps } from './IListItem.types';
 import { Card } from 'react-native-elements';
 import { Button, Image, Text, View } from 'react-native';
 import { getRandomImage } from '../../_helpers/utils';
+import { IFriend } from '../friends/IFriends.types';
 
-export const ListItem: FC<IListItemDataProps> = ({ item }) => {
+export const ListItem: FC<IListItemDataProps> = ({ item, onAddNewFriend }) => {
     console.log(getRandomImage())
     return (
         <Card>
@@ -18,7 +19,7 @@ export const ListItem: FC<IListItemDataProps> = ({ item }) => {
                     {item.firstName + ' ' + item.lastName}
                 </Text>
                 <Button
-                    onPress={() => console.log("clicked")}
+                    onPress={() => onAddNewFriend(item as IFriend)}
                     title="Add"
                 />
             </View>

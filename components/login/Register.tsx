@@ -76,55 +76,51 @@ const Register = (props: any) => {
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
 
-    const register = (auth: any) => {
+    const register = () => {
         if ((firstName || lastName || username || password) !== "") {
-            auth.register(firstName, lastName, username, password);
+            props.auth.register(firstName, lastName, username, password);
         } else {
             setMsg("Please fill out every field");
         }
     }
     
     return (
-        <AuthContext.Consumer>
-            {auth => (
-                <View style={styles.body}>
-                    <View style={styles.container}>
-                        <Text style={styles.body}>Create an Account</Text>
-                        <Text>First Name</Text>
-                        <TextInput
-                            textContentType="name"
-                            style={styles.input}
-                            placeholder="Harry"
-                            onChangeText={text => setFirstName(text)}
-                            value={firstName} />
-                        <Text>Last Name</Text>
-                        <TextInput
-                            textContentType="name"
-                            style={styles.input}
-                            placeholder="Potter"
-                            onChangeText={text => setLastName(text)}
-                            value={lastName} />
-                        <Text>Email</Text>
-                        <TextInput
-                            textContentType="emailAddress"
-                            style={styles.input}
-                            placeholder="iHaveAHairyPotter@hogwarts.com"
-                            onChangeText={text => setUsername(text)}
-                            value={username} />
-                        <Text>Password</Text>
-                        <TextInput
-                            secureTextEntry={true}
-                            textContentType="password"
-                            style={styles.input}
-                            placeholder="Keep this a secret"
-                            onChangeText={text => setPassword(text)}
-                            value={password} />
-                        <TextInput>{msg}</TextInput>
-                        <Button color="#8C55AA" title="Create Account" onPress={() => register(auth)} />
-                    </View>
-                </View>
-            )}
-        </AuthContext.Consumer>
+        <View style={styles.body}>
+            <View style={styles.container}>
+                <Text style={styles.body}>Create an Account</Text>
+                <Text>First Name</Text>
+                <TextInput
+                    textContentType="name"
+                    style={styles.input}
+                    placeholder="Harry"
+                    onChangeText={text => setFirstName(text)}
+                    value={firstName} />
+                <Text>Last Name</Text>
+                <TextInput
+                    textContentType="name"
+                    style={styles.input}
+                    placeholder="Potter"
+                    onChangeText={text => setLastName(text)}
+                    value={lastName} />
+                <Text>Email</Text>
+                <TextInput
+                    textContentType="emailAddress"
+                    style={styles.input}
+                    placeholder="iHaveAHairyPotter@hogwarts.com"
+                    onChangeText={text => setUsername(text)}
+                    value={username} />
+                <Text>Password</Text>
+                <TextInput
+                    secureTextEntry={true}
+                    textContentType="password"
+                    style={styles.input}
+                    placeholder="Keep this a secret"
+                    onChangeText={text => setPassword(text)}
+                    value={password} />
+                <TextInput>{msg}</TextInput>
+                <Button color="#8C55AA" title="Create Account" onPress={() => register()} />
+            </View>
+        </View>
     );   
 }
 

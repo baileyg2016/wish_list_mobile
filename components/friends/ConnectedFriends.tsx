@@ -9,7 +9,6 @@ import { AddNewFriend } from './AddNewFriend';
 import { FriendsWishList } from './FriendsWishList';
 import { IGridListItem } from '../gridItemList/IGridListDataProps.types';
 import { ADD_FRIEND } from '../../graphql/mutations';
-import { isTemplateExpression } from 'typescript';
 
 export const ConnectedFriends: FC<IFriendsDataProps> = (props: any) => {
     const { data: listOfFriends, loading: friendsLoading, error, refetch: refetchFriends } = useQuery(FRIENDS);
@@ -23,23 +22,23 @@ export const ConnectedFriends: FC<IFriendsDataProps> = (props: any) => {
     if (friendsLoading) {
         return <Text>Loading...</Text>
     }
-
-    const onFriendPress = useCallback((friend: IGridListItem) => {
+    console.log('here')
+    const onFriendPress = (friend: IGridListItem) => {
+        console.log('in')
         props.navigation.navigate('FriendsWishList', { pkFriend: friend.pk })
-    }, []);
-
-    const navigateToAddNewFriend = useCallback(() => {
+    };
+    
+    const navigateToAddNewFriend = () => {
         props.navigation.navigate('AddNewFriend');
-    }, []);
+    };
 
-    const onAddNewFriend = useCallback((friend: IFriend) => {
+    const onAddNewFriend = (friend: IFriend) => {
+        console.log(friend)
         addNewFriend({ variables: { pkFriend: friend.pkUser } });
-        if (data)
-            console.log(data)
-    }, []);
+    };
     
     const friends = listOfFriends.friends as Array<IFriend>;
-
+    console.log('render')
     return (
         <Stack.Navigator>
             <Stack.Screen name='Friends'>

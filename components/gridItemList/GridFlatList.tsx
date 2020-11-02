@@ -48,7 +48,6 @@ export const GridFlatList: FC<IGridListDataProps> = ({ data, onPress, refetch })
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     refetch();
-    console.log('refreshing')
     wait(2000).then(() => setRefreshing(false));
   }, []);
   

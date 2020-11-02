@@ -1,8 +1,10 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { AuthContext } from '../../_contexts/Contexts';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { LOGIN } from '../../graphql/queries';
+import { authService } from '../../_services';
+import { LoginDataProps } from './Login.types';
 
 const styles = StyleSheet.create({
     body: {
@@ -55,46 +57,50 @@ const styles = StyleSheet.create({
     },
 });
 
-export const Login: FC = (props: any) => {
+export const Login: FC<LoginDataProps> = (props: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
-    const { data, loading, error } = useQuery(LOGIN, {
-        variables: { email, password }
-    });
-
-    const loginClick = (auth: any) => {
-        auth.logIn(error, data);
+    const [login, { data, loading, error }] = useLazyQuery(LOGIN);
+    
+    const loginClick = () => {
+        login({
+            variables: { email: email, password: password },
+        });
     };
+
+    useEffect(() => {
+        // console.log('token at login: ', data.jwt)
+        if (data && data.login) {
+            console.log('token at login: ', data.jwt)
+            props.auth.logIn(data.login.jwt, data.login.firstName, data.login.lastName);
+        }
+    }, [data, props]);
     
     return (
-        <AuthContext.Consumer>
-            {auth => (
-                <View style={styles.body}>
-                    <View style={styles.container}>
-                        <Text style={styles.title}>Log into your Wish List!</Text>
-                        <Text style={{color: 'red'}}>{msg}</Text>
-                        <TextInput
-                            textContentType="emailAddress"
-                            style={styles.input}
-                            placeholder="Email"
-                            onChangeText={text => setEmail(text)}
-                            value={email}
-                        />
-                        <TextInput
-                            secureTextEntry={true}
-                            textContentType="password"
-                            style={styles.input}
-                            placeholder="Password"
-                            onChangeText={text => setPassword(text)}
-                            value={password}
-                        />
-                        <Button color="#8C55AA" title="Sign in" onPress={() => loginClick(auth)}/>
-                        {/* <Text style={styles.forgotAndRegister}>Forgot Password?</Text> */}
-                        <Text style={styles.forgotAndRegister} onPress={() => props.navigation.navigate("Register")}>Register</Text>
-                    </View>
-                </View>
-            )}
-        </AuthContext.Consumer>
+        <View style={styles.body}>
+            <View style={styles.container}>
+                <Text style={styles.title}>Log into your Wish List!</Text>
+                <Text style={{color: 'red'}}>{msg}</Text>
+                <TextInput
+                    textContentType="emailAddress"
+                    style={styles.input}
+                    placeholder="Email"
+                    onChangeText={text => setEmail(text)}
+                    value={email}
+                />
+                <TextInput
+                    secureTextEntry={true}
+                    textContentType="password"
+                    style={styles.input}
+                    placeholder="Password"
+                    onChangeText={text => setPassword(text)}
+                    value={password}
+                />
+                <Button color="#8C55AA" title="Sign in" onPress={loginClick}/>
+                {/* <Text style={styles.forgotAndRegister}>Forgot Password?</Text> */}
+                <Text style={styles.forgotAndRegister} onPress={() => props.navigation.navigate("Register")}>Register</Text>
+            </View>
+        </View>
     );
 }

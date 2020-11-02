@@ -1,7 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import FetchFromStorage from './FetchFromStorage';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { LOGIN } from '../graphql/queries';
+import { useMutation } from '@apollo/react-hooks';
 import { REGISTER } from '../graphql/mutations';
 
 const currUserSubject = new BehaviorSubject();
@@ -17,17 +16,18 @@ export const authService = {
 
 
 
-function login(error, data) {
-    if (error) {
-        console.error(`Error: ${error}`);
+async function login(jwt, firstName, lastName) {
+    console.log(jwt, firstName, lastName)
+    try {
+        await setToken(jwt);
+        await setName(firstName, lastName);
+        currUserSubject.next(jwt);
+        console.log(jwt)
+        return jwt;
+    } catch (error) {
+        console.error(error)
         return null;
-    } else {
-        setToken(data.login.jwt);
-        setName(data.login.firstName, data.login.lastName);
-        currUserSubject.next(data.login.jwt);
     }
-    console.log(data.login.jwt)
-    return data.login.jwt;
 }
 
 function register(firstName, lastName, email, password) {

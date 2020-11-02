@@ -6,7 +6,7 @@ export let graphqlClient: ApolloClient<NormalizedCacheObject>;
 
 export const clientPromise = async () => {
     const token = await getAccessToken();
-    console.log(token)
+    console.log(`Token in clientPromise: ${token}`)
     graphqlClient = new ApolloClient({
         uri: 'http://localhost:4000/graphql',
         headers: {
