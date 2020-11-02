@@ -8,7 +8,7 @@ import { IFriendsDataProps } from './IFriends.types';
 import { getRandomImage } from '../../_helpers/utils';
 
 export const Friends: FC<IFriendsDataProps> = (
-    { 
+    {
         friends, 
         onFriendPress, 
         refetch, 
