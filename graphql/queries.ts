@@ -34,3 +34,28 @@ export const FRIENDS = gql`
         }
     }
 `;
+
+export const SEARCH_FOR_FRIENDS = gql`
+    query SearchUsersForNewFriends($search: String!) {
+        searchUsersForNewFriends(search: $search) {
+            pkUser,
+            firstName,
+            lastName,
+            image_path,
+            email
+        }
+    }
+`;
+
+export const FRIENDS_ITEMS = gql`
+    query GetFriendsWishList($pkFriend: Int!) {
+        getFriendsWishList(pkFriend: $pkFriend) {
+            pkItem
+            name
+            url
+            imageURL
+            cost
+            size
+        }
+    }
+`;

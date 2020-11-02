@@ -8,11 +8,11 @@ import { IFriendsDataProps } from './IFriends.types';
 import { getRandomImage } from '../../_helpers/utils';
 
 export const Friends: FC<IFriendsDataProps> = (
-    { 
-        friends,
+    {
+        friends, 
         onFriendPress, 
-        refetch,
-        onAddFriendPress
+        refetch, 
+        onAddNewFriend
     }) => {
     const friendsList = friends.map(({pkUser, firstName, lastName, image_path}) => {
         console.log(getRandomImage())
@@ -25,7 +25,7 @@ export const Friends: FC<IFriendsDataProps> = (
                     <Title name="Friends" />
                 </View>
                 <TouchableOpacity
-                    onPress={onAddFriendPress}
+                    onPress={onAddNewFriend}
                 >
                     <View style={{flex: 1}}>
                         <Image 

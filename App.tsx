@@ -38,7 +38,7 @@ const App = () => {
 
   const [state, dispatch] = useReducer(
     (prevState: any, action: any) => {
-      console.log(`action: ${action}`)
+      console.log(action)
       switch (action.type) {
         case 'RESTORE_TOKEN':
           return {
@@ -93,15 +93,15 @@ const App = () => {
 
   const authContext = useMemo(
     () => ({
-      logIn: async (username: string, password: string) => {
+      logIn: async (jwt: string, firstName: string, lastName: string) => {
         // In a production app, we need to send some data (usually username, password) to server and get a token
         // We will also need to handle errors if sign in failed
         // After getting token, we need to persist the token using `AsyncStorage`
         // In the example, we'll use a dummy token
-        
-        // let token = ;
+        console.log(jwt, firstName, lastName)
+        const token = await auth.login(jwt, firstName, lastName);
         // console.log('token: ', token)
-        dispatch({ type: 'SIGN_IN', token: await auth.login(username, password) });
+        dispatch({ type: 'SIGN_IN', token });
       },
       logOut: () => {
         auth.logout();
@@ -125,10 +125,21 @@ const App = () => {
       <ApolloProvider client={graphqlClient}>
         <AuthContext.Provider value={authContext}>
               {state.token === null || state.token === undefined ? (
-                <Stack.Navigator>
-                  <Stack.Screen name="Login" component={Login} />
-                  <Stack.Screen name="Register" component={Register} />
-                </Stack.Navigator>
+                  <AuthContext.Consumer>
+                  {
+                    auth => 
+                      (
+                        <Stack.Navigator>
+                          <Stack.Screen name="Login">
+                            {props => <Login {...props} auth={auth} />}
+                          </Stack.Screen>
+                          <Stack.Screen name="Register">
+                            {props => <Register {...props} auth={auth} />}
+                          </Stack.Screen>
+                        </Stack.Navigator>
+                      )
+                  }
+                </AuthContext.Consumer>
               ) : (
                 <Tab.Navigator
                   screenOptions={({ route }: any) => ({
@@ -170,32 +181,6 @@ const App = () => {
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 25,
-    padding: 10
-  },
-  header: {
-    fontSize: 20
-  },
-  nav: {
-    flexDirection: "row",
-    justifyContent: "space-around"
-  },
-  navItem: {
-    flex: 1,
-    alignItems: "center",
-    padding: 10
-  },
-  subNavItem: {
-    padding: 5
-  },
-  topic: {
-    textAlign: "center",
-    fontSize: 15
-  }
-});
 
 // AppRegistry.registerComponent("MyApp", () => App);
 export default App;

@@ -1,3 +1,5 @@
+import { IFriend } from "../friends/IFriends.types";
+
 export enum IGridContexts {
     Home,
     Friends

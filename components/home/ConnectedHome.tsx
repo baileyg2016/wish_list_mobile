@@ -15,14 +15,17 @@ export const ConnectedHome: FC<IHomeDataProps> = () => {
         Linking.openURL(url);
     }
 
-    if (error) {
-        console.error(error);
-        return <SafeAreaView><Text>Error</Text></SafeAreaView>
-    }
-
     if (loading) {
         return <Text>Loading...</Text>
     }
+
+    if (error) {
+        console.error(error);
+        console.log("error here")
+        console.trace('tracing in connectedhome')
+        return <SafeAreaView><Text>Error in ConnectedHome</Text></SafeAreaView>
+    }
+
     console.log(data)
     const items = data.getItems as Array<IItem>;
     return (
